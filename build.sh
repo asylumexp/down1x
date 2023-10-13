@@ -48,7 +48,7 @@ done
 
 # Install dependencies to build palen1x
 apt-get update
-apt-get install -y --no-install-recommends git wget gawk debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev coreutils
+apt-get install -y --no-install-recommends git wget gawk debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev coreutils genisoimage
 
 # RootFS and Downra1n
 ROOTFS="https://dl-cdn.alpinelinux.org/alpine/v3.17/releases/$ARCH/alpine-minirootfs-3.17.3-$ARCH.tar.gz"
