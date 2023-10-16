@@ -146,7 +146,7 @@ grub-mkrescue -o "palen1x-tmp-$ARCH.iso" iso --compress=xz
 
 # Add exFAT partition
 EXFAT_IMG="exfat.img"
-EXFAT_SIZE="20M"
+EXFAT_SIZE="1M"
 
 # Create exFAT image
 dd if=/dev/zero of=$EXFAT_IMG bs=1M count=$EXFAT_SIZE
