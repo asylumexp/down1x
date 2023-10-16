@@ -48,7 +48,10 @@ done
 
 # Install dependencies to build palen1x
 apt-get update
-apt-get install -y --no-install-recommends git wget gawk debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev coreutils exfat-utils
+apt-get install -y --no-install-recommends git wget gawk debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev coreutils
+
+wget http://archive.ubuntu.com/ubuntu/pool/universe/e/exfat-utils/exfat-utils_1.3.0-2_amd64.deb
+dpkg -i exfat-utils_1.3.0-2_amd64.deb
 
 # Get proper files
 if [ "$1" = "RELEASE" ]; then
