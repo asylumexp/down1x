@@ -43,5 +43,5 @@ jobs:
           # Artifact name
           name: dualra1n-amd64 # optional, default is artifact
           # A file, directory or wildcard pattern that describes what to upload
-          path: /palen1x/*.iso
+          path: palen1x/*.iso
           # The desired behavior if no files are found using the provided path
