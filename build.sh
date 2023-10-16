@@ -199,7 +199,7 @@ EXFAT_IMG="exfat.img"
 EXFAT_SIZE="1M"
 
 # Create exFAT image
-dd if=/dev/zero of=$EXFAT_IMG bs=1M count=$EXFAT_SIZE
+dd if=/dev/zero of=$EXFAT_IMG bs=1M count=1
 
 # Format exFAT image
 mkfs.exfat $EXFAT_IMG
