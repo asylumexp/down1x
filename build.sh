@@ -141,14 +141,22 @@ find . | cpio -oH newc | xz -C crc32 --x86 -vz9eT$(nproc --all) > ../iso/boot/in
 popd
 
 # ISO creation
-grub-mkrescue -o "palen1x-$ARCH.iso" iso --compress=xz
+grub-mkrescue -o "palen1x-tmp-$ARCH.iso" iso --compress=xz
 
-mkdir isomount
-mount -o loop palen1x-$ARCH.iso isomount
-mkdir isomount/user
-mkdir isomount/user/profile-0
-cat "Refer to the documentation at AAAAAA to import or modify boot configurations" > isomount/user/README
-dd if=/dev/zero of=fat32.img bs=1M count=5  # Create a 5MB disk image
-mkfs.fat -F 32 fat32.img  # Format it as FAT32
-genisoimage -J -R -V new_partition -o dualn1x.iso -graft-points fat32.img=fat32.img isomount
+
+# Add exFAT partition
+EXFAT_IMG="exfat.img"
+EXFAT_SIZE="20M"
+
+# Create exFAT image
+dd if=/dev/zero of=$EXFAT_IMG bs=1M count=$EXFAT_SIZE
+
+# Format exFAT image
+mkfs.exfat $EXFAT_IMG
+
+# Append exFAT partition to ISO file
+cat $EXFAT_IMG palen1x-tmp-$ARCH.iso > palen1x-$ARCH.iso
+
+# Delete exFAT image
+rm -f $EXFAT_IMG
 
