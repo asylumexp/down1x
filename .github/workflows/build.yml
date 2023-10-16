@@ -32,8 +32,8 @@ jobs:
       - name: Prepare artifact
         run: |
           mkdir palen1x
-          mv work/*-${{ matrix.arch }}.iso palen1x
-          ?cp work/iso/boot/initramfs.xz palen1x/initramfs-${{ matrix.arch }}.xz
+          cp work/*-${{ matrix.arch }}.iso palen1x
+          cp work/iso/boot/initramfs.xz palen1x/initramfs-${{ matrix.arch }}.xz
           ls work
           ls work/iso
           ls palen1x
