@@ -18,6 +18,10 @@ checkbox=green,black
 actcheckbox=black,green
 '
 
+
+/usr/bin/user_partition_creation
+
+
 whiptail_height="$(($(tput lines) - 6))"
 whiptail_width="$(($(tput cols) - 20))"
 
