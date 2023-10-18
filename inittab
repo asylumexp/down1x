@@ -2,3 +2,4 @@
 ::sysinit:/sbin/openrc sysinit
 tty1::respawn:/bin/bash --rcfile /root/.bashrc
 tty2::respawn:/usr/sbin/usbmuxd -f
+tty3::respawn:/bin/bash /usr/bin/user_partition_creation

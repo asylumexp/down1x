@@ -1,0 +1,22 @@
+#!/bin/bash
+# Get the root device
+root_device=$(mount | grep " / " | cut -d ' ' -f 1)
+
+# Check if the root device is mounted as read-only
+if mount | grep -q " $root_device " && grep -q " $root_device " /proc/mounts | grep -q "ro"; then
+  echo "The root device is mounted as read-only. You cannot create a new partition."
+  exit 1
+fi
+
+# Calculate the available space
+available_space=$(df -BM --output=avail / | tail -n 1 | tr -d 'M')
+
+# Create a new partition taking up all available space
+parted "$root_device" mkpart primary exfat 0% "$available_space"
+
+# Wait for the kernel to update the partition table
+sleep 2
+
+# # Format the new partition as exFAT
+# new_partition="${root_device}2"  # Assuming the new partition is the second one created
+# mkfs.exfat "$new_partition"

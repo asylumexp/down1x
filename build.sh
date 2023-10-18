@@ -48,7 +48,7 @@ done
 
 # Install dependencies to build palen1x
 apt-get update
-apt-get install -y --no-install-recommends git wget gawk debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev coreutils exfatprogs
+apt-get install -y --no-install-recommends git wget gawk debootstrap mtools xorriso ca-certificates curl libusb-1.0-0-dev gcc make gzip xz-utils unzip libc6-dev coreutils Qexfatprogs
 
 
 # Get proper files
@@ -127,7 +127,7 @@ sleep 2
 cat << ! | chroot rootfs /usr/bin/env PATH=/usr/bin:/usr/local/bin:/bin:/usr/sbin:/sbin /bin/sh
 apk update
 apk upgrade
-apk add bash alpine-base usbmuxd ncurses udev openssh-client sshpass newt python3 py3-pip
+apk add bash alpine-base usbmuxd ncurses udev openssh-client sshpass newt btfs py3-pip parted
 apk add --no-scripts linux-lts linux-firmware-none
 rc-update add bootmisc
 rc-update add hwdrivers
@@ -193,20 +193,4 @@ popd
 # ISO creation
 grub-mkrescue -o "palen1x-tmp-$ARCH.iso" iso --compress=xz
 
-
-# Add exFAT partition
-EXFAT_IMG="exfat.img"
-EXFAT_SIZE="1M"
-
-# Create exFAT image
-dd if=/dev/zero of=$EXFAT_IMG bs=1M count=1
-
-# Format exFAT image
-mkfs.exfat $EXFAT_IMG
-
-# Append exFAT partition to ISO file
-cat $EXFAT_IMG palen1x-tmp-$ARCH.iso > palen1x-$ARCH.iso
-
-# Delete exFAT image
-rm -f $EXFAT_IMG
 
